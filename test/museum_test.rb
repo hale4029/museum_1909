@@ -87,5 +87,13 @@ class MuseumTest < Minitest::Test
     assert_equal true, @dmns.patrons.include?(@bob)
   end
 
+  def test_patrons_by_exhibit
+    @dmns.add_exhibit(@gems_and_minerals)
+    @bob.add_interest(@dead_sea_scrolls)
+    @bob.add_interest(@gems_and_minerals)
+    @dmns.admit(@bob)
+    assert_equal ({@gems_and_minerals => [@bob], @dead_sea_scrolls => []}), @dmns.patrons_by_exhibit_interest
+  end
+
 
 end
